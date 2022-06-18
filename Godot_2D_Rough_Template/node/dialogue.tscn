@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://script/dialogue_func.gd" type="Script" id=3]
+
+[node name="dialogue" type="Node2D"]
+z_index = 50
+z_as_relative = false
+script = ExtResource( 3 )
+
+[node name="PANEL" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 224.0
+margin_top = 320.0
+margin_right = 608.0
+margin_bottom = 432.0
+
+[node name="FACE" type="Sprite" parent="."]
+position = Vector2( 288, 376 )
+texture = ExtResource( 2 )
+
+[node name="RECT" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 328.0
+margin_top = 344.0
+margin_right = 576.0
+margin_bottom = 408.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "test test"
+autowrap = true
