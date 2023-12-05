@@ -1,42 +1,29 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/player_2D.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://script/camera_2D.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 32 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "walk"
 length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:rotation_degrees")
+tracks/0/path = NodePath("SPR:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 1, 1.5, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 45.0, 0.0, -45.0, 0.0 ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="player" type="KinematicBody2D"]
@@ -45,13 +32,13 @@ z_index = 10
 input_pickable = true
 script = ExtResource( 1 )
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="SPR" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="col" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CAM" type="Camera2D" parent="."]
 current = true
 limit_left = 0
 limit_top = 0
@@ -63,10 +50,10 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 3 )
 
-[node name="animation" type="AnimationPlayer" parent="."]
-reset_on_save = false
+[node name="ANIM" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
 anims/RESET = SubResource( 2 )
 anims/walk = SubResource( 3 )
+
+[connection signal="input_event" from="." to="." method="_on_player_input_event"]

@@ -1,6 +1,10 @@
-extends Node2D
+extends Control
 
 onready var rootnode = get_tree().root.get_node("base")
+onready var thisnode = sceneload.currentnode
+
+onready var audio_A = rootnode.get_node("AUDIO_A")
+onready var audio_B = rootnode.get_node("AUDIO_B")
 
 var inc1 = 0
 var inc2 = 0
@@ -30,6 +34,7 @@ onready var rect = self.get_node("RECT")
 
 export var DLGfile = "res://dialogue/test.txt"
 export var close_time = 5
+
 
 func erasearr():
 	read_tex.clear()
@@ -91,7 +96,6 @@ func sprlib(S_indx):
 				face.set_texture(load("res://image/face/emote_star.png"))
 			"HUH":
 				face.set_texture(load("res://image/face/emote_question.png"))
-	
 
 
 func start_dialogue():
@@ -99,19 +103,18 @@ func start_dialogue():
 		switch = true
 		texinit = true
 		fileinit = true
-	
 
 
 func _process(_delta):
-	self.position = Vector2(sceneload.playerref.position.x -320, sceneload.playerref.position.y -240)
+#	self.position = Vector2(sceneload.player_ref.position.x -320, sceneload.player_ref.position.y -240)
 	
-	if (Input.is_action_just_pressed("ui_select")):
+	if (Input.is_action_just_pressed("ui_ok")):
 		start_dialogue()
 	
 	if switch:
 		taktak()
 		isrunning = true
-	
+
 
 func taktak():
 	if texinit:
@@ -141,40 +144,37 @@ func taktak():
 			if haltinit:
 				if inc2 > close_time:
 					#free node
-					sceneload.playerref.movement = true
-					sceneload.dialogueref = null
-					self.queue_free()
-	
-					#set invisible and reset
-#					rect.set_visible(false)
-#
-#					inc1 = 0
-#					inc2 = 0
-#
-#					indx = -1
-#					loadindx = 0
-#					fileindx = 0
-#
-#					switch = false
-#					isrunning = false
+					sceneload.player_ref.movement = true
+					
+					sceneload.dialogue_ref = null
+					self.get_parent().queue_free()
 				else:
 					inc2 += .2
-	
+					
 			else:
-				if (Input.is_action_just_pressed("ui_accept")):
+				if Input.is_action_just_pressed("ui_ok"):
 					inc1 = 0
 					inc2 = 0
 					indx = -1
 					loadindx += 1
-	
-					fileinit = true
+					
+					if didread and didpush:
+						fileinit = true
 		else:
-			inc1 = 0
-			indx += 1
-			rect.set_visible_characters(indx)
-	
-			rootnode.get_node("AUDIO_B").stream = load("res://audio/tone1.wav")
-			rootnode.get_node("AUDIO_B").play()
+			if Input.is_action_just_pressed("ui_ok"):
+				rect.set_visible_characters(rect.get_total_character_count())
+				return
+			else:
+				inc1 = 0
+				indx += 1
+				rect.set_visible_characters(indx)
+				
+				audio_B.stream = load("res://audio/tone1.wav")
+				audio_B.play()
 	else:
-		inc1 += .2
-	
+		if Input.is_action_just_pressed("ui_ok"):
+			rect.set_visible_characters(rect.get_total_character_count())
+			return
+		else:
+			inc1 += .2
+

@@ -6,5 +6,3 @@ TX_sprite test 2.
 SP_FACEHAP
 TX_sprite test 3.
 SP_FACESAD
-TX_yipee
-SP_FACENORMAL
