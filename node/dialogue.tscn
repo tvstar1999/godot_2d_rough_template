@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://script/dialogue_func.gd" type="Script" id=3]
+
+[node name="dialogue" type="CanvasLayer"]
+
+[node name="DIALOGUE" type="Control" parent="."]
+margin_left = 256.0
+margin_top = 320.0
+margin_right = 256.0
+margin_bottom = 320.0
+script = ExtResource( 3 )
+
+[node name="PANEL" type="Panel" parent="DIALOGUE"]
+margin_top = 40.0
+margin_right = 320.0
+margin_bottom = 128.0
+
+[node name="RECT" type="Label" parent="DIALOGUE"]
+margin_left = 88.0
+margin_top = 52.0
+margin_right = 312.0
+margin_bottom = 116.0
+autowrap = true
+
+[node name="NAME" type="Label" parent="DIALOGUE"]
+margin_top = 16.0
+margin_right = 128.0
+margin_bottom = 35.0
+valign = 2
+
+[node name="FACE" type="TextureRect" parent="DIALOGUE"]
+margin_left = 16.0
+margin_top = 52.0
+margin_right = 80.0
+margin_bottom = 116.0
+expand = true

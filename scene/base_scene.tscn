@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="base" type="Node2D"]
+
+[node name="AUDIO_A" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+
+[node name="AUDIO_B" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+
+[node name="AUDIO_C" type="AudioStreamPlayer" parent="."]
+volume_db = -25.0

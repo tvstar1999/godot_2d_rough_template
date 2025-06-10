@@ -1,0 +1,8 @@
+TX_this a test.
+SP_TEST
+TX_sprite test 1.
+SP_FACENORMAL
+TX_sprite test 2.
+SP_FACEHAP
+TX_sprite test 3.
+SP_FACESAD
