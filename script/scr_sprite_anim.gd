@@ -160,7 +160,7 @@ func anim():
 					stop_call = true
 		
 			"strt":
-				if phase < 1:
+				if phase < self.hframes - 1:
 					phase += 1
 				else:
 					phase = 0

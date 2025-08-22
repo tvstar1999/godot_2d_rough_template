@@ -10,7 +10,7 @@ var rand_indx = 0
 
 var screen_transit_end = true
 
-var audio_transit_end = false
+var audio_transit_end = true
 var audio_transit_run = false
 
 
@@ -42,8 +42,8 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_focus_next"):
-		load_dialogue("null")
+#	if Input.is_action_just_pressed("ui_focus_next"):
+#		load_dialogue("null")
 	pass
 
 

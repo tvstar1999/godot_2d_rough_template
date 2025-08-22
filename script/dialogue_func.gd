@@ -6,6 +6,7 @@ onready var thisnode = sceneload.currentnode
 onready var audio_A = rootnode.get_node("AUDIO_A")
 onready var audio_B = rootnode.get_node("AUDIO_B")
 onready var audio_C = rootnode.get_node("AUDIO_C")
+onready var audio_D = rootnode.get_node("AUDIO_D")
 
 var inc1 = 0
 var inc2 = 0

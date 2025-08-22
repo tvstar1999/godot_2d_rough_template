@@ -3,10 +3,13 @@
 [node name="base" type="Node2D"]
 
 [node name="AUDIO_A" type="AudioStreamPlayer" parent="."]
-volume_db = -15.0
+volume_db = -10.0
 
 [node name="AUDIO_B" type="AudioStreamPlayer" parent="."]
-volume_db = -20.0
+volume_db = -12.0
 
 [node name="AUDIO_C" type="AudioStreamPlayer" parent="."]
-volume_db = -25.0
+volume_db = -12.0
+
+[node name="AUDIO_D" type="AudioStreamPlayer" parent="."]
+volume_db = -14.0

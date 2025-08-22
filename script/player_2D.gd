@@ -5,6 +5,7 @@ onready var rootnode = get_tree().root.get_node("base")
 onready var audio_A = rootnode.get_node("AUDIO_A")
 onready var audio_B = rootnode.get_node("AUDIO_B")
 onready var audio_C = rootnode.get_node("AUDIO_C")
+onready var audio_D = rootnode.get_node("AUDIO_D")
 
 onready var SPR = get_node("Node2D/SPR")
 onready var CS_hit = get_node("CS_HIT")
@@ -93,16 +94,16 @@ func _process(delta):
 		else:
 			speed = speed_load
 		
-		if !bypass_anim:
-			#C key behavior
-			if Input.is_action_just_pressed("ui_ok"):
-				if target_ref != null:
-					target_ref.free()
-#					target_ref.get_child(0).get_child(0).set_deferred("disabled", true)
-				
-				audio_B.stream = load("res://audio/twotone.wav")
-				audio_B.play()
+		#C key behavior
+		if Input.is_action_just_pressed("ui_ok"):
+			if target_ref != null:
+				target_ref.free()
+#				target_ref.get_child(0).get_child(0).set_deferred("disabled", true)
 			
+			audio_B.stream = load("res://audio/twotone.wav")
+			audio_B.play()
+		
+		if !bypass_anim:
 			#anim behavior
 			if velocity != Vector2.ZERO and !wait_anim:
 				anim_controller(false, walk_tex, 0, "none", 3, 1, 0, 0)
@@ -121,16 +122,23 @@ func _process(delta):
 				else:
 					#player
 					anim_controller(false, walk_tex, 0, "ping", 3, 1, 2, 0)
-				
+			
 			if velocity == Vector2.ZERO and !wait_anim:
 				anim_controller(false, reset_tex, 0, "stop", 1, 1, 0, 0)
 		
 		#movement input
 		if drag_enabled:
 			var new_position = get_global_mouse_position()
-			velocity = new_position - position;
+			velocity = (new_position - position);
+			
 			if velocity.length() > (drag_speed * delta):
+#				print(velocity.length())
+				
+				if velocity.length() < 8:
+					velocity = Vector2(0, 0)
+				
 				velocity = drag_speed * delta * velocity.normalized()
+				var _moveres_drag = self.move_and_slide(velocity * speed)
 		else:
 			moveinput()
 		var _moveres = self.move_and_slide(velocity * speed, dir)
@@ -232,6 +240,12 @@ func _on_player_input_event(_viewport, event, _shape_idx):
 			drag_enabled = false
 		else:
 			drag_enabled = true
+	
+	if event is InputEventScreenTouch:
+		Input.action_press("ui_ok")
+	
+	if event is InputEventScreenDrag:
+		drag_enabled = !drag_enabled
 
 
 func _on_anim_stopped():
